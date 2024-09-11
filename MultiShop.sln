@@ -7,7 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{34
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{72AF71AE-7827-4EAF-82DD-7640F27FE9A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.Catalog", "MultiShop.Catalog\MultiShop.Catalog.csproj", "{6F66793A-0B53-4414-87BB-039C4E50F52D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiShop.Catalog", "MultiShop.Catalog\MultiShop.Catalog.csproj", "{6F66793A-0B53-4414-87BB-039C4E50F52D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Product", "Product", "{5039275F-FE4B-405B-AB08-6A6DDB136EA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +28,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{72AF71AE-7827-4EAF-82DD-7640F27FE9A8} = {34F181B3-327F-4615-AFB5-60F834ED010A}
 		{6F66793A-0B53-4414-87BB-039C4E50F52D} = {72AF71AE-7827-4EAF-82DD-7640F27FE9A8}
+		{5039275F-FE4B-405B-AB08-6A6DDB136EA7} = {34F181B3-327F-4615-AFB5-60F834ED010A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2FDF0E86-FCC8-497E-BB00-39B221662422}
