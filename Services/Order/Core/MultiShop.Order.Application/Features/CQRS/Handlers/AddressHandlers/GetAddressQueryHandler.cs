@@ -6,11 +6,11 @@ namespace MultiShop.Order.Application.Features.CQRS.Handlers.AddressHandlers
 {
     public class GetAddressQueryHandler
     {
-        private IRepository<Address> _repository;
+        private readonly IRepository<Address> _repository;
 
-        private GetAddressQueryHandler(IRepository<Address> reposity)
+        public GetAddressQueryHandler(IRepository<Address> repository)
         {
-            _repository = reposity;
+            _repository = repository;
         }
 
         public async Task<List<GetAddressQueryResult>> Handle()

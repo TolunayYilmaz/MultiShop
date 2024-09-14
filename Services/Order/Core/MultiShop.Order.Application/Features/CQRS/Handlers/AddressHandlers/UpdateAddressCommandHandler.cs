@@ -8,7 +8,7 @@ namespace MultiShop.Order.Application.Features.CQRS.Handlers.AddressHandlers
     {
         private IRepository<Address> _repository;
 
-        private UpdateAddressCommandHandler(IRepository<Address> repository)
+        public UpdateAddressCommandHandler(IRepository<Address> repository)
         {
             _repository = repository;
         }

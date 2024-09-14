@@ -7,7 +7,7 @@ namespace MultiShop.Order.Application.Services
     {
         public static void AddApllicationService(this IServiceCollection services,IConfiguration configuration)
         {
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ServiceRegistiration).Assembly);
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ServiceRegistiration).Assembly));
         }
     }
 }
