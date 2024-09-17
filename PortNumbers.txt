@@ -1,0 +1,5 @@
+Catalog:https://localhost:7070
+Discount:https://localhost:7071
+Order:https://localhost:7072
+Cargo:https://localhost:7073
+Identity:http://localhost:5001
