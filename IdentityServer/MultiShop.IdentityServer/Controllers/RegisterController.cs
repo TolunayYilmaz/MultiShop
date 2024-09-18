@@ -10,8 +10,10 @@ using static IdentityServer4.IdentityServerConstants;
 
 namespace MultiShop.IdentityServer.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
+
     [Authorize(LocalApi.PolicyName)]
     public class RegisterController : ControllerBase
     {

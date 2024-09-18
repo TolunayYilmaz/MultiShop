@@ -3,3 +3,4 @@ Discount:https://localhost:7071
 Order:https://localhost:7072
 Cargo:https://localhost:7073
 Identity:http://localhost:5001
+Basket:http://localhost:7074
