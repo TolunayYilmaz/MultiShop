@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace MultiShop.WebUI.ViewComponents.UILayoutViewComponents
+namespace MultiShop.WebUI.ViewComponents.ProductListViewComponents
 {
-    public class _TopBarUILayoutComponentPartial:ViewComponent
+    public class _ProductListComponentPartial:ViewComponent
     {
         public IViewComponentResult Invoke()
         {
             return View();
         }
-    } 
+    }  
 }

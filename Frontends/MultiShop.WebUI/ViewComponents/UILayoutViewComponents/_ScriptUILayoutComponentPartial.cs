@@ -2,11 +2,11 @@
 
 namespace MultiShop.WebUI.ViewComponents.UILayoutViewComponents
 {
-    public class _TopBarUILayoutComponentPartial:ViewComponent
+    public class _ScriptUILayoutComponentPartial:ViewComponent
     {
         public IViewComponentResult Invoke()
         {
             return View();
         }
-    } 
+    }
 }

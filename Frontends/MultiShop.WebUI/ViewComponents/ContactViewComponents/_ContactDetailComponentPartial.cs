@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace MultiShop.WebUI.ViewComponents.UILayoutViewComponents
+namespace MultiShop.WebUI.ViewComponents.ContactViewComponents
 {
-    public class _TopBarUILayoutComponentPartial:ViewComponent
+    public class _ContactDetailComponentPartial:ViewComponent
     {
         public IViewComponentResult Invoke()
         {
             return View();
         }
-    } 
+    }
 }
