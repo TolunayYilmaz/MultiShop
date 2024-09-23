@@ -6,7 +6,7 @@ namespace MultiShop.Catalog.Entitites
     public class Product
     {
 
-        [BsonId]
+        [BsonId]//mongo db ıd tanımlama
         [BsonRepresentation(BsonType.ObjectId)]
         public string ProductId { get; set; }//Attriubute Id olduğunu belirtir.
         public string ProductName { get; set; }
