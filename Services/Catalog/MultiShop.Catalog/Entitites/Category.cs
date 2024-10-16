@@ -10,6 +10,8 @@ namespace MultiShop.Catalog.Entitites
         [BsonRepresentation(BsonType.ObjectId)]
         public string CategoryId { get; set; }//Attriubute Id olduğunu belirtir.
         public string CategoryName { get; set; }
+        public string ImageUrl { get; set; }
+
 
     } 
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MultiShop.DtoLayer.CatalogDtos.CategoryDtos;
 using Newtonsoft.Json;
 using System.Text;
@@ -7,6 +8,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/Category")]
+    [AllowAnonymous]
     public class CategoryController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;

@@ -8,5 +8,10 @@
         public string ProductImageCollecitonName { get; set; }
         public string ConnectionStrings { get; set; }
         public string DatabaseName { get; set; }
+        public string FeatureSliderCollecitonName { get; set; }
+        public string SpecialOfferCollecitonName { get; set; }
+        public string OfferDiscountCollecitonName { get; set; }
+        public string FeatureCollecitonName { get; set; }
+        public string BrandCollecitonName { get; set; }
     }
 }
