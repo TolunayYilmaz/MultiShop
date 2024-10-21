@@ -13,5 +13,6 @@
         public string OfferDiscountCollecitonName { get; set; }
         public string FeatureCollecitonName { get; set; }
         public string BrandCollecitonName { get; set; }
+        public string AboutCollecitonName { get; set; }
     }
 }

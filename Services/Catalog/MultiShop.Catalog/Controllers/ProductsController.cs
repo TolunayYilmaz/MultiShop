@@ -50,9 +50,16 @@ namespace MultiShop.Catalog.Controllers
             return Ok("Ürün başarıyla eklendi.");
         }
         [HttpGet("ProductListWithCategory")]
-        public async Task<IActionResult> ProdductListWithCategory()
+        public async Task<IActionResult> ProductListWithCategory()
         {
             var values=await _ProductService.GetProductsWithCategoryAsync();
+            return Ok(values);
+        } 
+        
+        [HttpGet("ProductListWithCategoryByCategoryId")]
+        public async Task<IActionResult> ProductListWithCategoryByCategoryId(string id)
+        {
+            var values=await _ProductService.GetProductsWithCategoryByCategoryIdAsync(id);
             return Ok(values);
         }
 
