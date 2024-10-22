@@ -29,6 +29,12 @@ namespace MultiShop.Catalog.Controllers
         {
             var value = await _productDetailService.GetByIdProductDetailAsync(id);
             return Ok(value);
+        }  
+        [HttpGet("GetByProductIdProductDetail")]
+        public async Task<IActionResult> GetByProductIdProductDetail(string id)
+        {
+            var value = await _productDetailService.GetByProductIdProductDetailAsync(id);
+            return Ok(value);
         }
         [HttpDelete]
         public async Task<IActionResult> DeleteProductDetail(string id)
