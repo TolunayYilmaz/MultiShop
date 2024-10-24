@@ -12,6 +12,7 @@
         public string FeatureCollecitonName { get; set; }
         public string BrandCollecitonName { get; set; }
         public string AboutCollecitonName { get; set; }
+        public string ContactCollecitonName { get; set; }
         public string ConnectionStrings { get; set; }
         public string DatabaseName { get; set; }
     }
