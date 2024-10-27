@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.DtoLayer.CatalogDtos.ContactDtos;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace MultiShop.WebUI.Controllers
@@ -22,6 +24,8 @@ namespace MultiShop.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(CreateContactDto createContactDto)
         {
+
+
             createContactDto.IsRead = false;
             createContactDto.SendDate = DateTime.Now;
             var client = _httpClientFactory.CreateClient();

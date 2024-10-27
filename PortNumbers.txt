@@ -4,3 +4,7 @@ Order:https://localhost:7072
 Cargo:https://localhost:7073
 Identity:http://localhost:5001
 Basket:http://localhost:7074
+Ocelot:http://localhost:5000
+Comment:http://localhost:7075
+Payment:http://localhost:7076
+Images:http://localhost:7077
