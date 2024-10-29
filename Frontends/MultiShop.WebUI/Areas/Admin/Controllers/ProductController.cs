@@ -3,48 +3,48 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MultiShop.DtoLayer.CatalogDtos.CategoryDtos;
 using MultiShop.DtoLayer.CatalogDtos.ProductDtos;
+using MultiShop.WebUI.Services.CatalogServices.CategoryServices;
+using MultiShop.WebUI.Services.CatalogServices.ProductServices;
 using Newtonsoft.Json;
 using System.Text;
 
 namespace MultiShop.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [AllowAnonymous]
     [Route("Admin/Product")]
 
     public class ProductController : Controller
     {
-        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IProductService _productService;
+        private readonly ICategoryService _categoryService;
 
-        public ProductController(IHttpClientFactory httpClientFactory)
+        public ProductController(IProductService productService, ICategoryService categoryService)
         {
-            _httpClientFactory = httpClientFactory;
+            _productService = productService;
+            _categoryService = categoryService;
         }
+
         [Route("Index")]
-        public async Task<IActionResult> Index()
+
+        private void ProductViewBagList(string viewBag3)
         {
             ViewBag.v1 = "AnaSayfa";
             ViewBag.v2 = "Ürünler";
-            ViewBag.v3 = "Ürün Listesi";
+            ViewBag.v3 = viewBag3;
             ViewBag.v0 = "Ürün İşlemleri";
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7070/api/Products");
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultProductDto>>(jsonData);
-                return View(values);
-            }
-            return View();
+        }
+        public async Task<IActionResult> Index()
+        {
+            ProductViewBagList("Ürün Listesi");
+            var values =await _productService.GetAllProductAsync();
+            return View(values);    
+           
         }
 
         [Route("ProductListWithCategory")]
         public async Task<IActionResult> ProductListWithCategory()
         {
-            ViewBag.v1 = "AnaSayfa";
-            ViewBag.v2 = "Ürünler";
-            ViewBag.v3 = "Ürün Listesi";
-            ViewBag.v0 = "Ürün İşlemleri";
+            ProductViewBagList("Ürün Listesi");
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("https://localhost:7070/api/Products/ProductListWithCategory");
             if (responseMessage.IsSuccessStatusCode)
@@ -60,10 +60,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> CreateProduct()
         {
-            ViewBag.v1 = "AnaSayfa";
-            ViewBag.v2 = "Ürünler";
-            ViewBag.v3 = "Ürün Listesi";
-            ViewBag.v0 = "Ürün İşlemleri";
+            ProductViewBagList("Ürün Listesi");
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("https://localhost:7070/api/Categories");
             var jsonData = await responseMessage.Content.ReadAsStringAsync();

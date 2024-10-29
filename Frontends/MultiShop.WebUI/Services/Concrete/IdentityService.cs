@@ -37,14 +37,14 @@ namespace MultiShop.WebUI.Services.Concrete
                 }
 
             });
-           
+
             var refreshToken = await _httpContextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.RefreshToken);
 
             RefreshTokenRequest refreshTokenRequest = new()
             {
                 ClientId = _clientSettings.MultiShopManagerClient.ClientId,
                 ClientSecret = _clientSettings.MultiShopManagerClient.ClientSecret,
-                RefreshToken = refreshToken, 
+                RefreshToken = refreshToken,
                 Address = discoveryEndPoint.TokenEndpoint
 
             };
@@ -52,8 +52,8 @@ namespace MultiShop.WebUI.Services.Concrete
 
             var authenticationToken = new List<AuthenticationToken>()
             {
-            
-            
+
+
                 new AuthenticationToken
                 {
                     Name=OpenIdConnectParameterNames.AccessToken,
@@ -74,35 +74,35 @@ namespace MultiShop.WebUI.Services.Concrete
             };
 
             var result = await _httpContextAccessor.HttpContext.AuthenticateAsync();
-            var properties=result.Properties;
+            var properties = result.Properties;
             properties.StoreTokens(authenticationToken);
-            await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,result.Principal,properties);
+            await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, result.Principal, properties);
 
-          
+
             return true;
 
         }
-    
+
 
         public async Task<bool> SingIn(SignInDto signInDto)
         {
             var discoveryEndPoint = await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
             {
                 //Address = "http://localhost:5001",//istek yapılan adres
-                Address=_serviceApiSettings.IdentityServerUrl,//Service Api settings bu yüzden gerekli dinamik hale getirdi 
-                Policy= new DiscoveryPolicy 
+                Address = _serviceApiSettings.IdentityServerUrl,//Service Api settings bu yüzden gerekli dinamik hale getirdi 
+                Policy = new DiscoveryPolicy
                 {
-                    RequireHttps=false
+                    RequireHttps = false
                 }
-                
+
             });
             var passwordTokenRequest = new PasswordTokenRequest
             {
                 ClientId = _clientSettings.MultiShopManagerClient.ClientId,
-                ClientSecret=_clientSettings.MultiShopManagerClient.ClientSecret,
-                UserName= signInDto.Username,
-                Password= signInDto.Password,
-                Address=discoveryEndPoint.TokenEndpoint
+                ClientSecret = _clientSettings.MultiShopManagerClient.ClientSecret,
+                UserName = signInDto.Username,
+                Password = signInDto.Password,
+                Address = discoveryEndPoint.TokenEndpoint
 
             };
             var token = await _httpClient.RequestPasswordTokenAsync(passwordTokenRequest);
@@ -116,7 +116,7 @@ namespace MultiShop.WebUI.Services.Concrete
             var userValues = await _httpClient.GetUserInfoAsync(userInfoRequest);
 
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(userValues.Claims,
-                CookieAuthenticationDefaults.AuthenticationScheme,"name","role");
+                CookieAuthenticationDefaults.AuthenticationScheme, "name", "role");
 
             ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
@@ -146,7 +146,7 @@ namespace MultiShop.WebUI.Services.Concrete
 
             await _httpContextAccessor
                 .HttpContext
-                .SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,claimsPrincipal,authenticationProperties);
+                .SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal, authenticationProperties);
             return true;
 
         }
