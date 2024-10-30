@@ -1,6 +1,7 @@
 {
   "Routes": [
-    { //Catolog Mikroservisi
+    //Catolog Mikroservisi
+    {
       "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -128,7 +129,7 @@
         "AuthenticationProviderKey": "OcelotAuthenticationScheme",
         "AllowedScopes": [ "PaymentFullPermission" ]
       }
-    }, 
+    },
     //Images Mikroservisi
     {
       "DownstreamPathTemplate": "/api/{everything}",

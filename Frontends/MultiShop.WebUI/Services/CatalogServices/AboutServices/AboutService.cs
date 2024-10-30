@@ -1,4 +1,5 @@
 ﻿using MultiShop.DtoLayer.CatalogDtos.AboutDtos;
+using Newtonsoft.Json;
 
 namespace MultiShop.WebUI.Services.CatalogServices.AboutServices
 {
@@ -24,13 +25,15 @@ namespace MultiShop.WebUI.Services.CatalogServices.AboutServices
         public async Task<List<ResultAboutDto>> GetAllAboutAsync()
         {
             var responseMessage = await _httpClient.GetAsync("abouts");
-            var values = await responseMessage.Content.ReadFromJsonAsync<List<ResultAboutDto>>();
+			var jsonData = await responseMessage.Content.ReadAsStringAsync();
+            var values = JsonConvert.DeserializeObject<List<ResultAboutDto>>(jsonData);
             return values;
         }
 
         public async Task<UpdateAboutDto> GetByIdAboutAsync(string id)
         {
             var responseMessage = await _httpClient.GetAsync("abouts/" + id);
+          
             var value = await responseMessage.Content.ReadFromJsonAsync<UpdateAboutDto>();
             return value;
 
