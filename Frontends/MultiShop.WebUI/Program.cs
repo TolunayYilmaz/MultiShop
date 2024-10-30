@@ -1,8 +1,14 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using MultiShop.WebUI.Handlers;
+using MultiShop.WebUI.Services.CatalogServices.AboutServices;
+using MultiShop.WebUI.Services.CatalogServices.BrandServices;
 using MultiShop.WebUI.Services.CatalogServices.CategoryServices;
+using MultiShop.WebUI.Services.CatalogServices.FeatureServices;
+using MultiShop.WebUI.Services.CatalogServices.FeatureSliderServices;
+using MultiShop.WebUI.Services.CatalogServices.OfferDiscountServices;
 using MultiShop.WebUI.Services.CatalogServices.ProductServices;
+using MultiShop.WebUI.Services.CatalogServices.SpecialOfferServices;
 using MultiShop.WebUI.Services.Concrete;
 using MultiShop.WebUI.Services.Interfaces;
 using MultiShop.WebUI.Settings;
@@ -20,7 +26,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCo
     opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
     opt.Cookie.Name = "MultiShopJwt";
 });
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,opt=>
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, opt =>
 {
     opt.LoginPath = "/Login/Index";
     opt.ExpireTimeSpan = TimeSpan.FromDays(5);
@@ -31,7 +37,7 @@ builder.Services.AddAccessTokenManagement();
 builder.Services.AddHttpContextAccessor();///cookie configrasyon
 
 
-builder.Services.AddScoped<ILoginService,LoginService>();
+builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IIdentityService, IdentityService>();
 
 // Add services to the container.
@@ -45,7 +51,7 @@ builder.Services.AddScoped<ResourceOwnerPasswordTokenHandler>();
 
 builder.Services.AddScoped<ClientCredentialTokenHandler>();
 
-builder.Services.AddScoped<IClientCredentialTokenService,ClientCredentialTokenService>();
+builder.Services.AddScoped<IClientCredentialTokenService, ClientCredentialTokenService>();
 
 
 var values = builder.Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
@@ -62,7 +68,30 @@ builder.Services.AddHttpClient<IProductService, ProductService>(opt =>
 {
     opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}");
 }).AddHttpMessageHandler<ClientCredentialTokenHandler>();//clienta gitme confiði patleri çekip instance ederken kullanmasý için tokene tetiklemek için AddHttpMessageHandler eklendi
-
+builder.Services.AddHttpClient<IAboutService, AboutService>(opt =>
+{
+opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}");
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();//clienta gitme confiði patleri çekip instance ederken kullanmasý için tokene tetiklemek için AddHttpMessageHandler eklendi
+builder.Services.AddHttpClient<IBrandService, BrandService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}");
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();//clienta gitme confiði patleri çekip instance ederken kullanmasý için tokene tetiklemek için AddHttpMessageHandler eklendi
+builder.Services.AddHttpClient<IFeatureService, FeatureService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}");
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();//clienta gitme confiði patleri çekip instance ederken kullanmasý için tokene tetiklemek için AddHttpMessageHandler eklendi
+builder.Services.AddHttpClient<IFeatureSliderService, FeatureSliderService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}");
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();//clienta gitme confiði patleri çekip instance ederken kullanmasý için tokene tetiklemek için AddHttpMessageHandler eklendi
+builder.Services.AddHttpClient<IOfferDiscountService, OfferDiscountService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}");
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();//clienta gitme confiði patleri çekip instance ederken kullanmasý için tokene tetiklemek için AddHttpMessageHandler eklendi
+builder.Services.AddHttpClient<ISpecialOfferService, SpecialOfferService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}");
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();//clienta gitme confiði patleri çekip instance ederken kullanmasý için tokene tetiklemek için AddHttpMessageHandler eklendi
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

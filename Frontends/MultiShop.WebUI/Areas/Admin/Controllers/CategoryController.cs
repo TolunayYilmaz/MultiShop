@@ -12,12 +12,12 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
 
     public class CategoryController : Controller
     {
-        private readonly IHttpClientFactory _httpClientFactory;
+    
         private readonly ICategoryService _categoryService;
 
-        public CategoryController(IHttpClientFactory httpClientFactory, ICategoryService categoryService)
+        public CategoryController(ICategoryService categoryService)
         {
-            _httpClientFactory = httpClientFactory;
+            
             _categoryService = categoryService;
         }
 
