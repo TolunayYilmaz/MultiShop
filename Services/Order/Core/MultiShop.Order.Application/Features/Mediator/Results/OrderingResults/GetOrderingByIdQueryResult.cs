@@ -1,6 +1,6 @@
-﻿namespace MultiShop.Order.Application.Features.Mediator.Results
+﻿namespace MultiShop.Order.Application.Features.Mediator.Results.OrderingResults
 {
-    public class GetOrderingQueryResult
+    public class GetOrderingByIdQueryResult
     {
         public int OrderingId { get; set; }
         public string UserId { get; set; }

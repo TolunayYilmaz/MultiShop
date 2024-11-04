@@ -3,11 +3,11 @@ using MultiShop.Order.Application.Features.Mediator.Results.OrderingResults;
 
 namespace MultiShop.Order.Application.Features.Mediator.Queries.OrderingQueries
 {
-    public class GetOrderingByIdQuery:IRequest<GetOrderingByIdQueryResult>
+    public class GetOrderingByUserIdQuery : IRequest<List<GetOrderingByUserIdQueryResult>>
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
-        public GetOrderingByIdQuery(int id)
+        public GetOrderingByUserIdQuery(string id)
         {
             Id = id;
         }

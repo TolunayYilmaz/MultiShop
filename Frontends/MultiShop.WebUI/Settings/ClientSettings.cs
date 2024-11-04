@@ -4,7 +4,7 @@
     {//appsettingsde aynı isimde olması grekiyor
         public Client MultiShopVisitorClient{ get; set; }
         public Client MultiShopManagerClient { get; set; }
-        public Client MultiShopAdminrClient { get; set; }
+        public Client MultiShopAdminClient { get; set; }
     }
     public class Client
     {

@@ -25,17 +25,20 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCookie(JwtBearerDefaults.AuthenticationScheme, opt =>
 {
-	opt.LoginPath = "/Login/Index";//Sisteme giriþ yapmadan kullanýcý olursa yönlendirme yapara
-	opt.LogoutPath = "/Login/LogOut";//çýkýþ
-	opt.AccessDeniedPath = "/Pages/AccesDenied";//yetkisizlerin aktarýlacaðý sayfa
-	opt.Cookie.HttpOnly = true;
+	//opt.LoginPath = "/Login/Index/";//Sisteme giriþ yapmadan kullanýcý olursa yönlendirme yapara
+	//opt.LogoutPath = "/Login/LogOut/";//çýkýþ
+	//opt.AccessDeniedPath = "/Pages/AccesDenied";//yetkisizlerin aktarýlacaðý sayfa
+    opt.LoginPath = "/Login/Index/";
+    opt.LogoutPath = "/Login/LogOut/";
+    opt.AccessDeniedPath = "/Pages/AccessDenied/";
+    opt.Cookie.HttpOnly = true;
 	opt.Cookie.SameSite = SameSiteMode.Strict;
 	opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
 	opt.Cookie.Name = "MultiShopJwt";
 });
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, opt =>
 {
-	opt.LoginPath = "/Login/Index";
+	opt.LoginPath = "/Login/Index/";
 	opt.ExpireTimeSpan = TimeSpan.FromDays(5);
 	opt.Cookie.Name = "MultiShopCookie";
 	opt.SlidingExpiration = true;
@@ -148,6 +151,12 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+});
 
 app.MapControllerRoute(
 	name: "default",
@@ -156,9 +165,9 @@ app.MapControllerRoute(
 app.UseEndpoints(endpoints =>
 {
 	endpoints.MapControllerRoute(
-	  name: "areas",
-	  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-	);
+      name: "areas",
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
 });
 
 
