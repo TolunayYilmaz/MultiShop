@@ -53,8 +53,9 @@
       "UpstreamScheme": "http",
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "OcelotAuthenticationScheme",
-        "AllowedScopes": [ "OrderFullPermission" ]
+        "AllowedScopes": [ "OrderFullPermisson" ]
       }
+
     },
     //Cargo Mikroservisi
     {

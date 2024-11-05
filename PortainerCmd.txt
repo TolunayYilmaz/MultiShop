@@ -7,3 +7,5 @@ docker run -d -p 8000:8000
 
 admin
 Qwedsa_321654
+postgreSql
+Qwedsa_321

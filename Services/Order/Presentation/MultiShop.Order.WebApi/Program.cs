@@ -13,6 +13,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     opt.Authority = builder.Configuration["IdentityServerUrl"]; //uygulamazýda appsetingjsondan gelcek
     opt.Audience = "ResourceOrder";//keyine sahip olanlar CatalogFullPermission","CatalogReadPermission yetkilerine sahip olacak
     opt.RequireHttpsMetadata = false;
+
 });
 
 // Add services to the container.

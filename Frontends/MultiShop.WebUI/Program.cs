@@ -18,6 +18,7 @@ using MultiShop.WebUI.Services.Concrete;
 using MultiShop.WebUI.Services.DiscountServices;
 using MultiShop.WebUI.Services.Interfaces;
 using MultiShop.WebUI.Services.OrderServices.OrderAddressServices;
+using MultiShop.WebUI.Services.OrderServices.OrderOrderingService;
 using MultiShop.WebUI.Settings;
 using NuGet.Configuration;
 
@@ -76,6 +77,11 @@ builder.Services.AddHttpClient<IBasketService, BasketService>(opt =>
 }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();    //token servis ve configleri
 
 builder.Services.AddHttpClient<IOrderAddressService, OrderAddressService>(opt =>
+{
+	opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Order.Path}");
+}).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();   
+
+builder.Services.AddHttpClient<IOrderOrderingService, OrderOrderingService>(opt =>
 {
 	opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Order.Path}");
 }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();    //token servis ve configleri
