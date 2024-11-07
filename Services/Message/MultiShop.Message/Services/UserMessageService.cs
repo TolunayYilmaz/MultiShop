@@ -11,9 +11,10 @@ namespace MultiShop.Message.Services
         private readonly MessageContext _messageContext;
         private readonly IMapper _mapper;
 
-        public UserMessageService(MessageContext messageContext)
+        public UserMessageService(MessageContext messageContext, IMapper mapper)
         {
             _messageContext = messageContext;
+            _mapper = mapper;
         }
 
         public async Task CreateMessageAsync(CreateMessageDto createMessageDto)
@@ -21,12 +22,14 @@ namespace MultiShop.Message.Services
           
             var value = _mapper.Map<UserMessage>(createMessageDto);
             await _messageContext.UserMessages.AddAsync(value);
+            await _messageContext.SaveChangesAsync();
         }
 
         public async Task DeleteMessageAsync(int id)
         {
            var value=await _messageContext.UserMessages.FindAsync(id);
            _messageContext.UserMessages.Remove(value);
+            await _messageContext.SaveChangesAsync();
         }
 
         public async Task<List<ResultInboxMessageDto>> GetInboxMessageAsync(string id)
@@ -56,7 +59,8 @@ namespace MultiShop.Message.Services
         public async Task UpdateMessageAsync(UpdateMessageDto updateMessageDto)
         {
             var value = _mapper.Map<UserMessage>(updateMessageDto);
-           _messageContext.UserMessages.Update(value);  
+           _messageContext.UserMessages.Update(value);
+            await _messageContext.SaveChangesAsync();
         }
     }
 }
