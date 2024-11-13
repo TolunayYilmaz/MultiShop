@@ -33,9 +33,8 @@ namespace MultiShop.WebUI.Services.CargoServices.CargoCompanyServices
 
         public async Task<UpdateCargoCompanyDto> GetByIdCargoCompanyAsync(int id)
         {
-            var responseMessage = await _httpClient.GetAsync("CargoCompanies");
-            var jsonData = await responseMessage.Content.ReadAsStringAsync();
-            var value = JsonConvert.DeserializeObject<UpdateCargoCompanyDto>(jsonData);
+            var responseMessage = await _httpClient.GetAsync("CargoCompanies/" + id);
+            var value = await responseMessage.Content.ReadFromJsonAsync<UpdateCargoCompanyDto>();
             return value;
         }
 

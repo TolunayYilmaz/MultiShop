@@ -18,9 +18,11 @@
 		<PackageReference Include="IdentityServer4.Storage" Version="4.1.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.35" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.18" />
+		<PackageReference Include="MongoDB.Driver" Version="2.28.0" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\Services\Catalog\MultiShop.Catalog\MultiShop.Catalog.csproj" />
 		<ProjectReference Include="..\MultiShop.DtoLayer\MultiShop.DtoLayer.csproj" />
 	</ItemGroup>
 
