@@ -30,7 +30,14 @@ namespace MultiShop.WebUI.Services.CommentServices
 			await _httpClient.DeleteAsync("Comments?id=" + id);
 		}
 
-		public async Task<List<ResultCommentDto>> GetAllCommentAsync()
+        public async Task<int> GetActiveCommandCount()
+        {
+            var responseMessage = await _httpClient.GetAsync("Comments/GetActiveCommandCount");
+            var value = await responseMessage.Content.ReadFromJsonAsync<int>();
+            return value;
+        }
+
+        public async Task<List<ResultCommentDto>> GetAllCommentAsync()
 		{
 			var responseMessage = await _httpClient.GetAsync("Comments");
 			var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -47,7 +54,21 @@ namespace MultiShop.WebUI.Services.CommentServices
 
 		}
 
-		public async Task UpdateCommentAsync(UpdateCommentDto updateCommentDto)
+        public async Task<int> GetPassiveCommandCount()
+        {
+            var responseMessage = await _httpClient.GetAsync("Comments/GetPassiveCommandCount");
+            var value = await responseMessage.Content.ReadFromJsonAsync<int>();
+            return value;
+        }
+
+        public async Task<int> GetTotalCommandCount()
+        {
+            var responseMessage = await _httpClient.GetAsync("Comments/GetTotalCommandCount");
+            var value = await responseMessage.Content.ReadFromJsonAsync<int>();
+            return value;
+        }
+
+        public async Task UpdateCommentAsync(UpdateCommentDto updateCommentDto)
 		{
 			await _httpClient.PutAsJsonAsync<UpdateCommentDto>("Comments", updateCommentDto);
 		}

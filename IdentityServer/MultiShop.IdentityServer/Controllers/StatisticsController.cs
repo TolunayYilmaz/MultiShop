@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MultiShop.IdentityServer.Models;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,9 +19,9 @@ namespace MultiShop.IdentityServer.Controllers
             _userManager = userManager;
         }
         [HttpGet]
-        public IActionResult GetUserCount()
+        public async Task<IActionResult> GetUserCount()
         {
-            int userCount = _userManager.Users.Count();
+            var userCount = await _userManager.Users.CountAsync();
             return Ok(userCount);
         }
     }
