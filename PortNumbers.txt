@@ -9,3 +9,4 @@ Comment:http://localhost:7075
 Payment:http://localhost:7076
 Images:http://localhost:7077
 Message:http://localhost:7078
+SignalRRealTime:http://localhost:7079

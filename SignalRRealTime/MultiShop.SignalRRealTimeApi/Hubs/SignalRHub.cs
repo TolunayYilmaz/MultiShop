@@ -15,13 +15,13 @@ namespace MultiShop.SignalRRealTimeApi.Hubs
             _signalRMessageService = signalRMessageService;
         }
 
-        public async Task SendStatisticCount(string id)
+        public async Task SendStatisticCount()
         {
-            var getTotalCommentCount=_signalRCommentService.GetTotalCommandCount();
+            var getTotalCommentCount=await _signalRCommentService.GetTotalCommentCount();
             await Clients.All.SendAsync("ReceiveCommentCount",getTotalCommentCount);
 
-            var getTotalMessageCountbyRecieverId = _signalRMessageService.GetTotalMessageCountbyRecieverId(id);
-            await Clients.All.SendAsync("ReceiveMessageCount", getTotalMessageCountbyRecieverId);
+            var getTotalMessageCount = await _signalRMessageService.GetTotalMessageCount();
+           await Clients.All.SendAsync("ReceiveMessageCount", getTotalMessageCount);
         }
     }
 }

@@ -1,19 +1,21 @@
-﻿namespace MultiShop.SignalRRealTimeApi.Services.SignalRCommentServices
+﻿using Newtonsoft.Json;
+
+namespace MultiShop.SignalRRealTimeApi.Services.SignalRCommentServices
 {
     public class SignalRCommentService:ISignalRCommentService
     {
-        private readonly HttpClient _httpClient;
-
-        public SignalRCommentService(HttpClient httpClient)
+        private readonly IHttpClientFactory _httpClientFactory;
+        public SignalRCommentService(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
+            _httpClientFactory = httpClientFactory;
         }
-
-        public async Task<int> GetTotalCommandCount()
+        public async Task<int> GetTotalCommentCount()
         {
-            var responseMessage = await _httpClient.GetAsync("Comments/GetTotalCommandCount");
-            var value = await responseMessage.Content.ReadFromJsonAsync<int>();
-            return value;
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("http://localhost:7075/api/CommentStatistics");
+            var jsonData = await responseMessage.Content.ReadAsStringAsync();
+            var commentCount = JsonConvert.DeserializeObject<int>(jsonData);
+            return commentCount;
         }
     }
 }

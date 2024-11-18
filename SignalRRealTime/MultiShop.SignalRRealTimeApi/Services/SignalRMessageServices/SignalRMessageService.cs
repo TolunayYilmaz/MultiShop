@@ -1,21 +1,23 @@
-﻿using System.Net.Http;
+﻿using Newtonsoft.Json;
+using System.Net.Http;
 
 namespace MultiShop.SignalRRealTimeApi.Services.SignalRMessageServices
 {
     public class SignalRMessageService:ISignalRMessageService
     {
-        private readonly HttpClient _httpClient;
-
-        public SignalRMessageService(HttpClient httpClient)
+        private readonly IHttpClientFactory _httpClientFactory;
+        public SignalRMessageService(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
+            _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<int> GetTotalMessageCountbyRecieverId(string id)
+        public async Task<int> GetTotalMessageCount()
         {
-            var responseMessage = await _httpClient.GetAsync("UserMessage/GetTotalMessageCountbyRecieverId?id=" + id);
-            var value = await responseMessage.Content.ReadFromJsonAsync<int>();
-            return value;
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("http://localhost:7078/api/UserMessageStatistics");
+            var jsonData = await responseMessage.Content.ReadAsStringAsync();
+            var commentCount = JsonConvert.DeserializeObject<int>(jsonData);
+            return commentCount;
         }
     }
 }
