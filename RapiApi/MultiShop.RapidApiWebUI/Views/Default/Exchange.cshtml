@@ -1,0 +1,30 @@
+﻿@model List<ExchangeViewModel.Rootobject>
+@{
+	Layout = null;
+	int index = 0;
+}
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<div class="container">
+	@foreach (var item in Model)
+	{
+		<br />
+		switch (index)
+		{
+			case 0:
+				<h3 class="alert alert-success">Dolar Alış: @item.data.exchange_rate Dolar Satış: @item.data.previous_close</h3>
+				break;
+			case 1:
+				<h3 class="alert alert-danger">Euro Alış: @item.data.exchange_rate Euro Satış: @item.data.previous_close</h3>
+				break;
+
+		}
+		index++;
+
+
+
+
+	}
+
+
+</div>
