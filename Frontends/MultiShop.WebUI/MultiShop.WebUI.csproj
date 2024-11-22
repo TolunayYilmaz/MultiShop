@@ -17,9 +17,11 @@
 	<ItemGroup>
 		<PackageReference Include="IdentityModel.AspNetCore" Version="3.0.0" />
 		<PackageReference Include="IdentityServer4.Storage" Version="4.1.2" />
+		<PackageReference Include="MailKit" Version="4.8.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.35" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.18" />
 		<PackageReference Include="MongoDB.Driver" Version="2.28.0" />
+		<PackageReference Include="NETCore.MailKit" Version="2.1.0" />
 	</ItemGroup>
 
 	<ItemGroup>
